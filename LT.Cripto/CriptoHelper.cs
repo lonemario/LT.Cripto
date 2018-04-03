@@ -42,10 +42,10 @@ namespace LT.Cripto
         }
 
         /// <summary>
-        /// 
+        /// Encrypt a String
         /// </summary>
-        /// <param name="plainText"></param>
-        /// <param name="passPhrase"></param>
+        /// <param name="plainText">Text to encrypt</param>
+        /// <param name="passPhrase">Password for crypt</param>
         /// <returns></returns>
         public string EncryptString(string plainText, string passPhrase)
         {
@@ -74,10 +74,10 @@ namespace LT.Cripto
 
 
         /// <summary>
-        /// 
+        /// Decrypt a String
         /// </summary>
-        /// <param name="cipherText"></param>
-        /// <param name="passPhrase"></param>
+        /// <param name="cipherText">Encrypted Text</param>
+        /// <param name="passPhrase">Password for decrypt</param>
         /// <returns></returns>
         public string DecryptString(string cipherText, string passPhrase)
         {
@@ -98,9 +98,20 @@ namespace LT.Cripto
             MemoryStream memoryStream = new MemoryStream(cipherTextBytes);
             CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
             byte[] plainTextBytes = new byte[cipherTextBytes.Length];
-            int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-            memoryStream.Close();
-            cryptoStream.Close();
+            int decryptedByteCount = 0;
+            try
+            {
+                decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+            }
+            catch
+            {
+                throw new Exception("Wrong Password!");
+            }
+            finally
+            {
+                memoryStream.Close();
+                cryptoStream.Close();
+            }
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
         }
 

@@ -22,7 +22,7 @@ namespace LT.CriptoTest
                 //Encrypt
                 stringToEncrypt = RandomGenerator.GenericString(RandomGenerator.GenericInt(300));
                 stringEncrypted = cripto.EncryptString(stringToEncrypt, Password);
-                //Decrypt
+                //Decrypt  
                 if (stringToEncrypt != cripto.DecryptString(stringEncrypted, Password))
                     throw new Exception("The strings don't match!!");
                 Console.WriteLine($"String {i.ToString()} ok!");
