@@ -27,7 +27,7 @@ namespace LT.CriptoTest
                     throw new Exception("The strings don't match!!");
                 Console.WriteLine($"String {i.ToString()} ok!");
             }
-            Console.ReadKey();
+            //Console.ReadKey();
             
         }
     }
