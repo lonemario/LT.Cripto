@@ -27,7 +27,7 @@ jobs:
       run: echo "PACKAGE_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV     
 
     - name: Pack
-      run: dotnet pack .\LT.Cripto\LT.Cripto.csproj --configuration Release /p:PackageVersion=${{ env.PACKAGE_VERSION }} --output ./nupkgs
+      run: dotnet pack ./LT.Cripto/LT.Cripto.csproj --configuration Release /p:PackageVersion=${{ env.PACKAGE_VERSION }} --output ./nupkgs
 
     - name: Publish to NuGet
       run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
